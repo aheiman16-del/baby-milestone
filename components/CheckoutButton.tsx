@@ -1,12 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, CSSProperties } from 'react'
 import { ProductKey } from '@/lib/stripe'
 
 interface CheckoutButtonProps {
   productKey: ProductKey
   label: string
   className?: string
+  style?: CSSProperties
   babyName?: string
   email?: string
 }
@@ -15,6 +16,7 @@ export default function CheckoutButton({
   productKey,
   label,
   className = '',
+  style,
   babyName,
   email,
 }: CheckoutButtonProps) {
@@ -42,11 +44,7 @@ export default function CheckoutButton({
   }
 
   return (
-    <button
-      onClick={handleClick}
-      disabled={loading}
-      className={className}
-    >
+    <button onClick={handleClick} disabled={loading} className={className} style={style}>
       {loading ? 'Loading...' : label}
     </button>
   )
