@@ -8,13 +8,13 @@ const products = [
     key: 'gender_reveal' as const,
     title: 'Gender Reveal Video',
     desc: 'A personalized video reveal delivered within 24-48 hours. Share with family, post to Instagram, keep forever.',
-    price: '$34',
+    price: '$24',
   },
   {
     key: 'birth_announcement' as const,
     title: 'Birth Announcement Video + Card',
     desc: 'Personalized birth announcement video and digital photo card. Ready to send and share in 24-48 hours.',
-    price: '$49',
+    price: '$39',
   },
 ]
 
