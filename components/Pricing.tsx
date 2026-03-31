@@ -4,35 +4,31 @@ import { motion } from 'framer-motion'
 import CheckoutButton from './CheckoutButton'
 
 const features = [
-  { label: 'Monthly milestone video', essential: true, keepsake: true, legacy: true },
-  { label: 'Digital photo card', essential: true, keepsake: true, legacy: true },
-  { label: 'Private baby page', essential: true, keepsake: true, legacy: true },
-  { label: 'Stat comparison card', essential: false, keepsake: true, legacy: true },
-  { label: 'Monthly letter from parent to baby', essential: false, keepsake: true, legacy: true },
-  { label: 'Instagram caption options', essential: false, keepsake: true, legacy: true },
-  { label: 'Grandparent text template', essential: false, keepsake: true, legacy: true },
-  { label: 'Seasonal holiday cards', essential: false, keepsake: false, legacy: true },
-  { label: 'Monthly milestone checklist', essential: false, keepsake: false, legacy: true },
-  { label: 'Instagram reel cover graphic', essential: false, keepsake: false, legacy: true },
-  { label: 'First foods tracker card', essential: false, keepsake: false, legacy: true },
+  { label: 'Monthly milestone video', essential: true, keepsake: true },
+  { label: 'Digital photo card', essential: true, keepsake: true },
+  { label: 'Private baby page', essential: true, keepsake: true },
+  { label: 'Monthly milestone checklist', essential: true, keepsake: true },
+  { label: 'Stat comparison card', essential: false, keepsake: true },
+  { label: 'Monthly letter from parent to baby', essential: false, keepsake: true },
+  { label: 'Printed photo card mailed to you', essential: false, keepsake: true },
+  { label: 'Seasonal holiday cards', essential: false, keepsake: true },
 ]
 
 const plans = [
   { key: 'essential_monthly' as const, name: 'Essential', price: '$14', annual: '$112', popular: false },
-  { key: 'keepsake_monthly' as const, name: 'Keepsake', price: '$19', annual: '$152', popular: true },
-  { key: 'legacy_monthly' as const, name: 'Legacy', price: '$27', annual: '$216', popular: false },
+  { key: 'keepsake_monthly' as const, name: 'Keepsake', price: '$22', annual: '$176', popular: true },
 ]
 
 function Check({ yes }: { yes: boolean }) {
   return yes
-    ? <span className="text-lg" style={{ color: 'var(--coral)' }}>✓</span>
-    : <span className="text-gray-300">—</span>
+    ? <span className="text-lg" style={{ color: 'var(--coral)' }}>&#10003;</span>
+    : <span className="text-gray-300">&mdash;</span>
 }
 
 export default function Pricing() {
   return (
     <section id="pricing" className="py-24 bg-white">
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="max-w-4xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -51,7 +47,7 @@ export default function Pricing() {
           className="rounded-3xl overflow-hidden border border-gray-100 shadow-sm"
         >
           {/* Header row */}
-          <div className="grid grid-cols-4">
+          <div className="grid grid-cols-3">
             <div className="p-6 bg-gray-50" />
             {plans.map((plan) => (
               <div
@@ -86,7 +82,7 @@ export default function Pricing() {
                     color: plan.popular ? '#F5727B' : 'var(--coral)',
                   }}
                 >
-                  {plan.annual}/yr — Save 2 months
+                  {plan.annual}/yr &mdash; Save 2 months
                 </div>
               </div>
             ))}
@@ -96,7 +92,7 @@ export default function Pricing() {
           {features.map((f, i) => (
             <div
               key={i}
-              className="grid grid-cols-4 border-t border-gray-100"
+              className="grid grid-cols-3 border-t border-gray-100"
             >
               <div className="p-4 text-sm text-gray-600 bg-gray-50 flex items-center">{f.label}</div>
               <div className="p-4 flex items-center justify-center" style={{ backgroundColor: 'var(--cream-bg)' }}>
@@ -105,14 +101,11 @@ export default function Pricing() {
               <div className="p-4 flex items-center justify-center" style={{ backgroundColor: 'var(--navy)', opacity: 0.95 }}>
                 <Check yes={f.keepsake} />
               </div>
-              <div className="p-4 flex items-center justify-center" style={{ backgroundColor: 'var(--cream-bg)' }}>
-                <Check yes={f.legacy} />
-              </div>
             </div>
           ))}
 
           {/* CTA row */}
-          <div className="grid grid-cols-4 border-t border-gray-100">
+          <div className="grid grid-cols-3 border-t border-gray-100">
             <div className="p-6 bg-gray-50" />
             {plans.map((plan) => (
               <div
