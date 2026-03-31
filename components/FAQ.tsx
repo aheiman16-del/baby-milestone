@@ -1,20 +1,62 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 const faqs = [
-  { q: 'What kind of photos should I submit?', a: 'Any photos you love from the month — phone photos are perfect. We recommend a mix: close-up face shots, full body, and a fun candid moment. No professional photography needed.' },
-  { q: 'How long does it take to get my video?', a: 'Within 24-48 hours of submitting your photos and monthly form. We send everything straight to your inbox.' },
-  { q: 'Can I cancel anytime?', a: 'Yes, completely. No lock-in contracts. Cancel from your account dashboard whenever you want.' },
-  { q: 'What if I miss a month?', a: "No penalty — just submit when you're ready. We keep your baby page active and pick back up whenever you submit." },
-  { q: 'Is this a good gift for grandparents?', a: "It's genuinely the most-loved baby shower and holiday gift we've seen. Grandparents get shared access to the private baby page and watch videos on repeat." },
-  { q: "What's included in the private baby page?", a: "Every video, photo card, stat card, and monthly letter — all in a beautiful timeline at a private URL like ourmilestone.co/emma-johnson. Share it with family via link. No login needed to view." },
+  {
+    q: 'What kind of photos should I submit?',
+    a: 'Everyday moments are perfect! Bath time, tummy time, first foods, smiles, even the messy ones. We recommend 3-5 of your favorites each month. No professional photography needed.',
+  },
+  {
+    q: 'How long does it take to get my video?',
+    a: 'Monthly milestone videos are delivered within 3-5 business days of your photo submission. One-time products (gender reveals, birth announcements) are delivered within 24-48 hours.',
+  },
+  {
+    q: 'Can I cancel anytime?',
+    a: 'Yes, cancel anytime with no fees or penalties. Your baby page and all past videos remain accessible even after canceling.',
+  },
+  {
+    q: 'What if I miss a month?',
+    a: 'No problem! Your subscription pauses automatically if you don\u2019t submit photos. You\u2019re never charged for a month you skip. Just pick back up whenever you\u2019re ready.',
+  },
+  {
+    q: 'Is this a good gift for grandparents?',
+    a: 'It\u2019s our most popular gift. Grandparents get a new video of their grandchild every month, delivered right to their phone. Many grandparents say it\u2019s the best gift they\u2019ve ever received.',
+  },
+  {
+    q: 'What\u2019s included in the private baby page?',
+    a: 'A beautiful, shareable web page for your baby with all their monthly videos, photos, and milestones in one place. Share the link with family so they can follow along. It\u2019s like a living baby book.',
+  },
+  {
+    q: 'How is this different from doing it myself?',
+    a: 'You could absolutely do it yourself with Canva or CapCut. But most parents don\u2019t \u2014 life gets busy and months slip by. We make sure every milestone gets captured, professionally, without you having to find the time.',
+  },
+  {
+    q: 'What does the Keepsake plan\u2019s printed card include?',
+    a: 'Each month we mail you a high-quality printed photo card featuring your baby\u2019s milestone photo and stats. It\u2019s a physical keepsake you can put on the fridge, in a scrapbook, or send to grandparents.',
+  },
 ]
 
-export default function FAQ() {
-  const [open, setOpen] = useState<number | null>(null)
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <button
+      onClick={() => setOpen(!open)}
+      className="w-full text-left border-b border-gray-100 py-5 group"
+    >
+      <div className="flex items-center justify-between">
+        <span className="font-semibold text-sm pr-4" style={{ color: 'var(--navy)' }}>{q}</span>
+        <span className="text-gray-400 text-xl flex-shrink-0 transition-transform group-hover:text-gray-600" style={{ transform: open ? 'rotate(45deg)' : 'rotate(0deg)' }}>+</span>
+      </div>
+      {open && (
+        <p className="text-sm text-gray-500 mt-3 leading-relaxed pr-8">{a}</p>
+      )}
+    </button>
+  )
+}
 
+export default function FAQ() {
   return (
     <section id="faq" className="py-24 bg-white">
       <div className="max-w-2xl mx-auto px-6">
@@ -27,38 +69,9 @@ export default function FAQ() {
         >
           Frequently asked questions
         </motion.h2>
-
-        <div className="space-y-3">
+        <div>
           {faqs.map((faq, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="border border-gray-100 rounded-2xl overflow-hidden"
-            >
-              <button
-                onClick={() => setOpen(open === i ? null : i)}
-                className="w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition"
-              >
-                <span className="font-semibold text-sm" style={{ color: 'var(--navy)' }}>{faq.q}</span>
-                <span className="text-xl text-gray-400 ml-4 flex-shrink-0">{open === i ? '−' : '+'}</span>
-              </button>
-              <AnimatePresence initial={false}>
-                {open === i && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <p className="px-5 pb-5 text-gray-500 text-sm leading-relaxed">{faq.a}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
+            <FAQItem key={i} q={faq.q} a={faq.a} />
           ))}
         </div>
       </div>
