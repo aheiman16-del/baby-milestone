@@ -21,6 +21,13 @@ export const PRODUCTS = {
     description: 'Personalized birth announcement video and digital photo card.',
     type: 'one_time' as const,
   },
+  gift_annual: {
+    name: 'Gift — Full Year Keepsake',
+    price: 17900,
+    priceId: process.env.STRIPE_PRICE_GIFT_ANNUAL!,
+    description: 'Gift 12 months of the Keepsake plan. Baby shower, holidays, or anytime.',
+    type: 'one_time' as const,
+  },
   essential_monthly: {
     name: 'Essential Plan',
     price: 1400,
